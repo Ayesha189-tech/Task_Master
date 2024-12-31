@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Task Master - Organize your tasks and achieve your goals with ease.">
+    <title>Task Master</title>
+    <link rel="stylesheet" href="c.css">
+    <script>
+        function toggleParagraph() {
+            var shortParagraph = document.getElementById("short-paragraph");
+            var fullParagraph = document.getElementById("full-paragraph");
+            var link = document.querySelector(".read-more");
+
+            if (fullParagraph.style.display === "none") {
+                fullParagraph.style.display = "block";
+                shortParagraph.style.display = "none";
+                link.textContent = "Read Less";
+            } else {
+                fullParagraph.style.display = "none";
+                shortParagraph.style.display = "block";
+                link.textContent = "Read More";
+            }
+        }
+        // JavaScript for Carousel Functionality with Descriptive Event Names
+const slides = document.querySelector('.slides');
+const slide = document.querySelectorAll('.slide');
+const prevButton = document.querySelector('.prev');
+const nextButton = document.querySelector('.next');
+
+let currentIndex = 0;
+const slideWidth = slide[0].clientWidth;
+
+// Event dispatcher function
+function dispatchCarouselEvent(eventName) {
+    const event = new CustomEvent(eventName, {
+        detail: {
+            currentIndex,
+            totalSlides: slide.length,
+        },
+    });
+    slides.dispatchEvent(event);
+}
+
+// Function to move slides
+function updateCarousel() {
+    slides.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    dispatchCarouselEvent('carousel:update'); // Event when the carousel updates
+}
+
+// Event listener for Previous button
+prevButton.addEventListener('click', () => {
+    currentIndex = (currentIndex > 0) ? currentIndex - 1 : slide.length - 1;
+    updateCarousel();
+    dispatchCarouselEvent('carousel:previous'); // Event for previous button click
+});
+
+// Event listener for Next button
+nextButton.addEventListener('click', () => {
+    currentIndex = (currentIndex < slide.length - 1) ? currentIndex + 1 : 0;
+    updateCarousel();
+    dispatchCarouselEvent('carousel:next'); // Event for next button click
+});
+
+// Swipe functionality for touch devices
+let startX = 0;
+let endX = 0;
+
+slides.addEventListener('touchstart', (event) => {
+    startX = event.touches[0].clientX;
+});
+
+slides.addEventListener('touchend', (event) => {
+    endX = event.changedTouches[0].clientX;
+    if (startX > endX + 50) {
+        // Swipe left
+        currentIndex = (currentIndex < slide.length - 1) ? currentIndex + 1 : 0;
+        updateCarousel();
+        dispatchCarouselEvent('carousel:swipe-left'); // Event for swipe left
+    } else if (startX < endX - 50) {
+        // Swipe right
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : slide.length - 1;
+        updateCarousel();
+        dispatchCarouselEvent('carousel:swipe-right'); // Event for swipe right
+    }
+});
+
+// Optional: Listen for custom events
+slides.addEventListener('carousel:update', (e) => {
+    console.log(`Carousel updated: Slide ${e.detail.currentIndex + 1} of ${e.detail.totalSlides}`);
+});
+
+slides.addEventListener('carousel:previous', () => {
+    console.log('Previous button clicked.');
+});
+
+slides.addEventListener('carousel:next', () => {
+    console.log('Next button clicked.');
+});
+
+slides.addEventListener('carousel:swipe-left', () => {
+    console.log('Swiped left.');
+});
+
+slides.addEventListener('carousel:swipe-right', () => {
+    console.log('Swiped right.');
+});
+
+    </script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">Task Master</div>
+            <nav>
+                <ul class="navi">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="i.html">Dashboard</a></li>
+                    <li class="butn"><a href="ind.html">Sign Up</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="back hero">
+        <h1>
+            <span class="heading1">Organize Your Tasks</span><br>
+            <span class="heading2">Achieve Your Goals</span>
+        </h1>
+        <a href="ind.html"><button class="cta">Get Started..</button></a>
+    </section>
+
+    <section class="carousel">
+        <h2>Task Management Features</h2>
+        <div class="slider">
+            <button class="prev" aria-label="Previous Slide">❮</button>
+            <div class="slides">
+                <div class="slide">Plan Your Day</div>
+                <div class="slide">Track Your Progress</div>
+                <div class="slide">Achieve Deadlines</div>
+            </div>
+            <button class="next" aria-label="Next Slide">❯</button>
+        </div>
+    </section>
+
+    <main>
+        <section class="content">
+            <article>
+                <h2>Why Task Master?</h2>
+                <p id="short-paragraph">Welcome to Task Master – the ultimate solution for staying organized and productive!</p>
+                <p id="full-paragraph" style="display:none;">We provide powerful, easy-to-use tools to help individuals, teams, and businesses manage tasks, prioritize goals, and boost efficiency. Whether you’re handling personal to-do lists or managing complex projects, Task Master simplifies task management, making it easier to stay on track and achieve your goals.
+                Our mission is to help you organize, collaborate, and execute with ease, giving you more time to focus on what matters. Join us and turn your tasks into achievements!</p>
+                <a class="read-more" onclick="toggleParagraph()">Read More</a>
+            </article>
+            <aside>
+                <h3>How Task Master Works</h3>
+                <ul>
+                    <li><a href="#">Create Tasks</a></li>
+                    <li><a href="#">Set Priorities</a></li>
+                    <li><a href="#">Collaborate with Teams</a></li>
+                    <li><a href="#">Track Your Progress</a></li>
+                </ul>
+            </aside>
+        </section>
+
+        <section class="cards">
+            <div class="card">
+                <img src="h.avif" alt="Card Image" class="card-img">
+                <h3>Task Management</h3>
+                <p>"Efficiently plan, track, and manage tasks to ensure seamless collaboration and timely project completion."</p>
+            </div>
+            <div class="card">
+                <img src="c.jpeg" alt="Card Image" class="card-img">
+                <h3>Collaboration</h3>
+                <p>"Foster seamless teamwork and communication to achieve shared goals efficiently."</p>
+            </div>
+            <div class="card">
+                <img src="p.avif" alt="Card Image" class="card-img">
+                <h3>Performance Tracking</h3>
+                <p> "Monitor progress and outcomes to drive continuous improvement and success."</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Contact: 123 Main St, City, Country</p>
+        <p>Connect with us: 
+            <a href="#" aria-label="Facebook">Facebook</a> | 
+            <a href="#" aria-label="Twitter">Twitter</a> | 
+            <a href="#" aria-label="Instagram">Instagram</a>
+        </p>
+        <p>&copy; 2024 Task Master</p>
+    </footer>
+</body>
+</html>
